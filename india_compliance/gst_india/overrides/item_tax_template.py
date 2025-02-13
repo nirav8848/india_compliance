@@ -13,6 +13,7 @@ def validate(doc, method=None):
 
 
 def validate_zero_tax_options(doc):
+    print(doc,doc.name)
     if doc.gst_treatment != "Taxable":
         doc.gst_rate = 0
         return
