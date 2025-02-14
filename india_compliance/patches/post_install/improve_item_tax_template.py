@@ -81,6 +81,7 @@ def create_or_update_item_tax_templates(companies):
 
     # update tax rates
     for template_name in item_tax_templates:
+        print("------",template_name)
         doc = frappe.get_doc(DOCTYPE, template_name)
         if doc.company not in companies or not doc.taxes:
             continue
