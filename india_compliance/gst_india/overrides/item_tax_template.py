@@ -14,8 +14,7 @@ def validate(doc, method=None):
 
 
 def validate_zero_tax_options(doc):
-    if frappe.flags.in_test or os.getenv("CI") == "true":
-        return
+    print(doc.name,doc.gst_treatment,doc.gst_rate)
     if doc.gst_treatment != "Taxable":
         doc.gst_rate = 0
         return
