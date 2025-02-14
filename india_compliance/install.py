@@ -1,6 +1,7 @@
 import click
 import json
 import frappe
+import random
 import os
 from india_compliance.audit_trail.setup import setup_fixtures as setup_audit_trail
 from india_compliance.gst_india.constants import BUG_REPORT_URL
@@ -138,7 +139,27 @@ def update_item_tax_template_test_records():
         json.dump(test_records, file, indent=4)
 
     frappe.msgprint("Test records updated successfully.")
-        
+
+def update_item_test_records():
+    # Step 1: Load existing test records from the file
+    test_records_path = frappe.get_app_path("erpnext", "stock", "doctype", "item", "test_records.json")
+    
+    try:
+        with open(test_records_path, "r") as file:
+            test_records = json.load(file)
+    except FileNotFoundError:
+        frappe.throw(f"File not found: {test_records_path}")
+        return
+
+    # Step 2: Modify the main doctype records (not child tables)
+    for record in test_records:
+        record["gst_hsn_code"] = random_number = ''.join(random.choices('0123456789', k=7))  # Example: Setting gst_rate same as tax_rate
+
+    # Step 3: Save the modified test records back to the file
+    with open(test_records_path, "w") as file:
+        json.dump(test_records, file, indent=4)
+
+    frappe.msgprint("Test records updated successfully.")
         
         
     
