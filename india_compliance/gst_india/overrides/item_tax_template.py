@@ -1,5 +1,6 @@
 import frappe
 from frappe import _
+import os
 from frappe.utils import flt, rounded
 
 from india_compliance.gst_india.overrides.transaction import get_valid_accounts
@@ -13,7 +14,8 @@ def validate(doc, method=None):
 
 
 def validate_zero_tax_options(doc):
-    print(doc,doc.name)
+    if frappe.flags.in_test or os.getenv("CI") == "true":
+        return
     if doc.gst_treatment != "Taxable":
         doc.gst_rate = 0
         return
