@@ -69,6 +69,9 @@ def after_install():
 
         print("Updating Item Tax Template Test Records...")
         update_item_tax_template_test_records()
+
+        print("Updating Item Test Records...")
+        update_item_test_records()
         
 
     except Exception as e:
