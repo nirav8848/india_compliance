@@ -154,7 +154,7 @@ def update_item_test_records():
         frappe.throw(f"File not found: {test_records_path}")
         return
 
-    gst_hsn_code = frappe.db.get_value("GST HSN CODE",["hsn_code"])
+    gst_hsn_code = frappe.db.get_value("GST HSN Code",["hsn_code"])
 
     # Step 2: Modify the main doctype records (not child tables)
     for record in test_records:
