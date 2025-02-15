@@ -18,11 +18,15 @@ def update_hsn_code(doc):
     if not frappe.flags.category_hsn_code:
         return
 
+    
+
     doc.gst_hsn_code = frappe.flags.category_hsn_code
     del frappe.flags.category_hsn_code
 
 
 def validate_hsn_code(doc):
+
+    print("ITEM NAME -> " , doc.name)
     # HSN Code is being validated only for sales items
     if not doc.is_sales_item:
         return
