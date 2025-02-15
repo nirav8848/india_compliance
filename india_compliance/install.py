@@ -159,7 +159,13 @@ def update_item_test_records():
 
     # Step 2: Modify the main doctype records (not child tables)
     for record in test_records:
-        record["gst_hsn_code"] = gst_hsn_code[0].hsn_code
+        new_hsn = frappe.new_doc("GST HSN Code")
+        new_hsn.hsn_code = ''.join(random.choices('0123456789', k=6))
+        new_hsn.description = record.get("description")
+        new_hsn.save()
+
+        record["gst_hsn_code"] = new_hsn.hsn_code
+        
 
     # Step 3: Save the modified test records back to the file
     with open(test_records_path, "w") as file:
