@@ -155,6 +155,7 @@ def update_item_test_records():
         return
 
     gst_hsn_code = frappe.db.get_value("GST HSN Code",["hsn_code"])
+    print("GST HSN CODE->",gst_hsn_code)
 
     # Step 2: Modify the main doctype records (not child tables)
     for record in test_records:
@@ -164,7 +165,7 @@ def update_item_test_records():
     with open(test_records_path, "w") as file:
         json.dump(test_records, file, indent=4)
 
-    frappe.msgprint("Test records updated successfully.")
+    print("Test records updated successfully.")
         
         
     
